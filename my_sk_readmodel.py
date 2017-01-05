@@ -1,39 +1,32 @@
+from sklearn.naive_bayes import MultinomialNB
+mnb=MultinomialNB()
+
+import pickle
+fname1 = r"model.model"
+f = open(fname1)
+mnb = pickle.load(f)
+
+
+def my_test(x):
+    print type(x)
+
+
+
+
+
 import pandas
-data = pandas.read_csv("data/mv_qcif_motheranddaughter_0.txt",sep="    ")
-#print data.head()
-#print data.info()
+
 list=[]
 for i in range(0,64):
     list.append(str(i))
+
+data = pandas.read_csv("data/mv_qcif_motheranddaughter_0.txt",sep="    ")
 X_motheranddaughter=data[list]
 Y_motheranddaughter=data['vec']
-#print X.info()
-#data.to_csv("mo.csv")
-
-from sklearn.naive_bayes import MultinomialNB
-mnb=MultinomialNB()
-#mnb.fit(X_motheranddaughter,Y_motheranddaughter)
-#y_predict_motheranddaughter=mnb.predict(X_motheranddaughter)
-
-from sklearn.metrics import classification_report
-#print "motheranddaughter :",mnb.score(X_motheranddaughter,Y_motheranddaughter)
-#print classification_report(Y,y_predict)
-
-
-
 
 data = pandas.read_csv("data/mv_qcif_salesman.txt",sep="    ")
-#print data.info()
 X_salesman=data[list]
 Y_salesman=data['vec']
-#print X
-#mnb.fit(X_salesman,Y_salesman)
-#y_predict=mnb.predict(X)
-#print "salesman :",mnb.score(X_salesman,Y_salesman)
-#print "motheranddaughter :",mnb.score(X_motheranddaughter,Y_motheranddaughter)
-
-
-
 
 data = pandas.read_csv("data/mv_qcif_left.txt",sep="    ")
 X_left=data[list]
@@ -63,15 +56,6 @@ data = pandas.read_csv("data/mv_qcif_carphone.txt",sep="    ")
 X_carphone=data[list]
 Y_carphone=data['vec']
 
-mnb.fit(X_salesman,Y_salesman)
-mnb.fit(X_motheranddaughter,Y_motheranddaughter)
-#mnb.fit(X_left,Y_left)
-mnb.fit(X_highway,Y_highway)
-mnb.fit(X_hall,Y_hall)
-#mnb.fit(X_forman,Y_forman)
-mnb.fit(X_container,Y_container)
-mnb.fit(X_coastguard,Y_coastguard)
-#mnb.fit(X_carphone,Y_carphone)
 score_salesman=mnb.score(X_salesman,Y_salesman)
 score_motheranddaughter=mnb.score(X_motheranddaughter,Y_motheranddaughter)
 score_left=mnb.score(X_left,Y_left)
@@ -99,6 +83,3 @@ print ""
 print "all_avg :",(score_salesman+score_motheranddaughter+score_left+score_highway+score_hall+score_forman+score_container+score_coastguard+score_carphone)/9.0
 
 
-import pickle
-with open(r"model.model", 'w') as f:
-    f = pickle.dump(mnb, f)
