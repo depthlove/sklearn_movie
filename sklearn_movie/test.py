@@ -11,6 +11,7 @@ from sklearn.metrics import classification_report
 #print "motheranddaughter :",mnb.score(X_motheranddaughter,Y_motheranddaughter)
 #print classification_report(Y,y_predict)
 
+'''
 data = pandas.read_csv("data/mother-daughter_qcif.txt",sep="    ")
 X_motheranddaughter=data[list]
 Y_motheranddaughter=data['vec']
@@ -52,7 +53,7 @@ mnb.fit(X_hall,Y_hall)
 mnb.fit(X_container,Y_container)
 mnb.fit(X_coastguard,Y_coastguard)
 mnb.fit(X_carphone,Y_carphone)
-
+mnb.fit(X_forman,Y_forman)
 
 score_salesman=mnb.score(X_salesman,Y_salesman)
 score_motheranddaughter=mnb.score(X_motheranddaughter,Y_motheranddaughter)
@@ -78,7 +79,15 @@ print ""
 print "avg :",(score_salesman+score_motheranddaughter+score_highway+score_hall+score_container+score_coastguard)/6.0
 print ""
 print "all_avg :",(score_salesman+score_motheranddaughter+score_highway+score_hall+score_forman+score_container+score_coastguard+score_carphone)/9.0
+'''
 
+data = pandas.read_csv("data/forman.txt",sep="    ")
+X_forman=data[list]
+Y_forman=data['vec']
+
+mnb.fit(X_forman,Y_forman)
+score_forman=mnb.score(X_forman,Y_forman)
+print "forman :",score_forman
 
 
 
