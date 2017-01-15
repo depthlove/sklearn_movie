@@ -1,6 +1,9 @@
-#include<Python.h>
+//#include<Python.h>
+#include "mysk_py.hpp"
+#include<vector>
 
 int main(){
+	/*
 	Py_Initialize();
 	PyRun_SimpleString("print 'Hello Python!'\n");
 	PyObject *pModule, *pFunc, *pFunc2, *pFunc3;
@@ -36,6 +39,18 @@ int main(){
 	printf("3 : %d\n", res);
 	
 	Py_Finalize();
+	*/
+
+	
+	std::vector<int> testdata(mysk_py.datasize);
+	int *testdata2 = new int[mysk_py.datasize];
+	for (int i = 0;i < mysk_py.datasize;++i) {
+		testdata[i] = i;
+		testdata2[i] = i;
+	}
+
+	printf("hpp vector\t: %d\n", mysk_py.predict(testdata));
+	printf("hpp *     \t: %d\n", mysk_py.predict(testdata2));
 
 	system("pause");
 	return 0;

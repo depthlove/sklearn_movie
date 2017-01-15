@@ -23,5 +23,13 @@
     <None Include="my_sk_readmodel.py">
       <Filter>源文件</Filter>
     </None>
+    <None Include="README.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mysk_py.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
