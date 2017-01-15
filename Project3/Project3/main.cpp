@@ -42,9 +42,9 @@ int main(){
 	*/
 
 	
-	std::vector<int> testdata(mysk_py.datasize);
-	int *testdata2 = new int[mysk_py.datasize];
-	for (int i = 0;i < mysk_py.datasize;++i) {
+	std::vector<int> testdata(mysk_py.datasize());
+	int *testdata2 = new int[mysk_py.datasize()];
+	for (int i = 0;i < mysk_py.datasize();++i) {
 		testdata[i] = i;
 		testdata2[i] = i;
 	}

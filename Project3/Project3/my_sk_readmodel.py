@@ -1,6 +1,10 @@
 from sklearn.naive_bayes import MultinomialNB
 mnb=MultinomialNB()
 
+datasize=64
+def get_datasize():
+    return datasize
+
 import pickle
 f = open(r"model.model")
 mnb = pickle.load(f)

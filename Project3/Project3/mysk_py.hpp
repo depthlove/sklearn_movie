@@ -10,10 +10,11 @@ public:
 	MYSK_PY();
 	~MYSK_PY();
 	int predict(const std::vector<int> data);
-	const int datasize = 64;
+	int datasize() { return mydatasize; }
 	int predict(const int data[]);
 private:
 	PyObject *pModule, *pFunc;
+	int mydatasize;
 };
 static MYSK_PY mysk_py;
 
@@ -22,6 +23,8 @@ MYSK_PY::MYSK_PY()
 	Py_Initialize();
 	pModule = PyImport_Import(PyString_FromString("my_sk_readmodel"));
 	pFunc = PyObject_GetAttrString(pModule, "my_test3");
+	PyObject *pArgs=NULL, *pFunc_datasize= PyObject_GetAttrString(pModule, "get_datasize");
+	mydatasize = PyInt_AsLong(PyObject_CallObject(pFunc_datasize,pArgs));
 }
 
 MYSK_PY::~MYSK_PY()
@@ -43,8 +46,8 @@ int MYSK_PY::predict(const std::vector<int> data) {
 int MYSK_PY::predict(const int data[]) {
 	PyObject *pArgs, *pValue;
 	int res;
-	pArgs = PyTuple_New(datasize);
-	for (size_t i = 0; i < datasize; i++)
+	pArgs = PyTuple_New(datasize());
+	for (size_t i = 0; i < datasize(); i++)
 		PyTuple_SetItem(pArgs, i, PyInt_FromLong(data[i]));
 	pValue = PyObject_CallObject(pFunc, pArgs);
 	res = PyInt_AsLong(pValue);
