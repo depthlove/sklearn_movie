@@ -2,7 +2,7 @@ from sklearn.naive_bayes import MultinomialNB
 import pandas
 mnb=MultinomialNB()
 
-datasize=128
+datasize=64
 def get_datasize():
     return datasize
 
@@ -39,6 +39,7 @@ def my_test3(*z):
     #print (pandas.DataFrame(numpy.array(z).reshape(1,-1))).values[0]
     #print type(pandas.Series(numpy.array(z)))
     #print (numpy.array(z).reshape(1,-1))[0]
+    print numpy.array(z).reshape(1,-1)
     return mnb.predict(numpy.array(z).reshape(1,-1))
     #return mnb.predict((pandas.DataFrame(numpy.array(z).reshape(1,-1))).values[0])
 

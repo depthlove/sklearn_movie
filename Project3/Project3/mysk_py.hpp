@@ -9,9 +9,11 @@ class MYSK_PY
 public:
 	MYSK_PY();
 	~MYSK_PY();
-	int predict(const std::vector<int> data);
+	template <class T>
+	T predict(const std::vector<T> data);
 	int datasize() { return mydatasize; }
-	int predict(const int data[]);
+	template <class T>
+	T predict(const T data[]);
 private:
 	PyObject *pModule, *pFunc;
 	int mydatasize;
@@ -32,9 +34,10 @@ MYSK_PY::~MYSK_PY()
 	Py_Finalize();
 }
 
-int MYSK_PY::predict(const std::vector<int> data) {
+template <class T>
+T MYSK_PY::predict(const std::vector<T> data) {
 	PyObject *pArgs, *pValue;
-	int res;
+	T res;
 	pArgs = PyTuple_New(data.size());
 	for (size_t i = 0; i < data.size(); i++) {
 		PyTuple_SetItem(pArgs, i, PyInt_FromLong(data[i]));
@@ -47,9 +50,10 @@ int MYSK_PY::predict(const std::vector<int> data) {
 	return res;
 }
 
-int MYSK_PY::predict(const int data[]) {
+template <class T>
+T MYSK_PY::predict(const T data[]) {
 	PyObject *pArgs, *pValue;
-	int res;
+	T res;
 	pArgs = PyTuple_New(datasize());
 	for (size_t i = 0; i < datasize(); i++) {
 		PyTuple_SetItem(pArgs, i, PyInt_FromLong(data[i]));

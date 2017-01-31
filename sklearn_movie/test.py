@@ -88,15 +88,15 @@ print "all_avg :",(score_salesman+score_motheranddaughter+score_highway+score_ha
 # X_forman=data[list]
 # Y_forman=data['vec']
 
-data = pandas.read_csv("data/mother_128.txt", sep="     ",engine='python')
-#print data
+data = pandas.read_csv("data/mv_qcif_salesman.txt", sep="    ", engine='python')
+# print data
 # X_mother_128=data[list]
-ll=range(1, 129)
-X_mother_128=data[ll]
-#X_mother_128 = {data[i] for i in range(0, 128)}
+ll = range(1, 65)
+X_mother_128 = data[ll]
+# X_mother_128 = {data[i] for i in range(0, 128)}
 Y_mother_128 = data['vec']
-#print X_mother_128
-#print Y_mother_128
+# print X_mother_128
+# print Y_mother_128
 print type(X_mother_128)
 print X_mother_128.values[0]
 
