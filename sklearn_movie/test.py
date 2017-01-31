@@ -1,21 +1,24 @@
 import pandas
 
-list=[]
-for i in range(0,64):
+list = []
+for i in range(0, 128):
     list.append(str(i))
+print list
 
 from sklearn.naive_bayes import MultinomialNB
-mnb=MultinomialNB()
+
+mnb = MultinomialNB()
 
 from sklearn.metrics import classification_report
-#print "motheranddaughter :",mnb.score(X_motheranddaughter,Y_motheranddaughter)
-#print classification_report(Y,y_predict)
 
+# print "motheranddaughter :",mnb.score(X_motheranddaughter,Y_motheranddaughter)
+# print classification_report(Y,y_predict)
+
+
+# data = pandas.read_csv("data/mother-daughter_qcif.txt",sep="    ")
+# X_motheranddaughter=data[list]
+# Y_motheranddaughter=data['vec']
 '''
-data = pandas.read_csv("data/mother-daughter_qcif.txt",sep="    ")
-X_motheranddaughter=data[list]
-Y_motheranddaughter=data['vec']
-
 data = pandas.read_csv("data/salesman_qcif.txt",sep="    ")
 X_salesman=data[list]
 Y_salesman=data['vec']
@@ -81,16 +84,40 @@ print ""
 print "all_avg :",(score_salesman+score_motheranddaughter+score_highway+score_hall+score_forman+score_container+score_coastguard+score_carphone)/9.0
 '''
 
-data = pandas.read_csv("data/forman.txt",sep="    ")
-X_forman=data[list]
-Y_forman=data['vec']
+# data = pandas.read_csv("data/forman.txt",sep="    ")
+# X_forman=data[list]
+# Y_forman=data['vec']
 
-mnb.fit(X_forman,Y_forman)
-score_forman=mnb.score(X_forman,Y_forman)
-print "forman :",score_forman
+data = pandas.read_csv("data/mother_128.txt", sep="     ",engine='python')
+#print data
+# X_mother_128=data[list]
+ll=range(1, 129)
+X_mother_128=data[ll]
+#X_mother_128 = {data[i] for i in range(0, 128)}
+Y_mother_128 = data['vec']
+#print X_mother_128
+#print Y_mother_128
+print type(X_mother_128)
+print X_mother_128.values[0]
 
+# mnb.fit(X_forman,Y_forman)
+# score_forman=mnb.score(X_forman,Y_forman)
+# print "forman :",score_forman
 
+# mnb.fit(X_motheranddaughter,Y_motheranddaughter)
+# score_motheranddaughter=mnb.score(X_motheranddaughter,Y_motheranddaughter)
+# print "motheranddaughter :",score_motheranddaughter
+
+mnb.fit(X_mother_128, Y_mother_128)
+score_mother_128 = mnb.score(X_mother_128, Y_mother_128)
+print "mother_128 :", score_mother_128
 
 import pickle
+
 with open(r"model.model", 'w') as f:
     f = pickle.dump(mnb, f)
+
+# print mnb.predict(X_forman)
+# print mnb.predict(X_motheranddaughter)
+print mnb.predict(X_mother_128)
+print mnb.predict(X_mother_128.values[0])

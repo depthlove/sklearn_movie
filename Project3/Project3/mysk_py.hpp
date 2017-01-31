@@ -36,10 +36,14 @@ int MYSK_PY::predict(const std::vector<int> data) {
 	PyObject *pArgs, *pValue;
 	int res;
 	pArgs = PyTuple_New(data.size());
-	for (size_t i = 0; i < data.size(); i++)
+	for (size_t i = 0; i < data.size(); i++) {
 		PyTuple_SetItem(pArgs, i, PyInt_FromLong(data[i]));
+		//printf("%d\t", data[i]);
+	}
+	//printf("\n");
 	pValue = PyObject_CallObject(pFunc, pArgs);
 	res = PyInt_AsLong(pValue);
+	//printf("%d\n", res);
 	return res;
 }
 
@@ -47,10 +51,14 @@ int MYSK_PY::predict(const int data[]) {
 	PyObject *pArgs, *pValue;
 	int res;
 	pArgs = PyTuple_New(datasize());
-	for (size_t i = 0; i < datasize(); i++)
+	for (size_t i = 0; i < datasize(); i++) {
 		PyTuple_SetItem(pArgs, i, PyInt_FromLong(data[i]));
+		//printf("%d\t", data[i]);
+	}
+	//printf("\n");
 	pValue = PyObject_CallObject(pFunc, pArgs);
 	res = PyInt_AsLong(pValue);
+	//printf("%d\n", res);
 	return res;
 }
 
